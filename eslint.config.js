@@ -1,4 +1,4 @@
-import config from "@romashka_rv/frontend-config/eslint.config.js";
+import config from "@romashka_rv/frontend-config/eslint";
 
 export default [
   ...config

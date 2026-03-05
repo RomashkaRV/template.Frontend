@@ -13,7 +13,8 @@
     "lint:ts": "next lint",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
-    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix"
+    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "^15.5.12",
@@ -23,12 +24,13 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.5.2",
-    "@romashka_rv/frontend-config": "^2.6.0",
+    "@romashka_rv/frontend-config": "3.0.2",
     "@svgr/webpack": "8.1.0",
     "@types/node": "22.7.5",
     "@types/react": "19.0.3",
     "@types/react-dom": "19.0.2",
     "eslint": "9.34.0",
+    "husky": "9.1.7",
     "lint-staged": "15.3.0",
     "react-html-props": "2.0.3",
     "string-replace-loader": "3.1.0",
@@ -36,12 +38,6 @@
   },
   "engines": {
     "node": ">=20.11.0"
-  },
-  "commitlint": {
-    "extends": "./node_modules/@romashka_rv/frontend-config/commitlintrc.json"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/@romashka_rv/frontend-config/eslint.config.js"
   },
   "stylelint": {
     "extends": "./node_modules/@romashka_rv/frontend-config/stylelintrc.json"
@@ -51,6 +47,6 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": "npm run lint:ts:fix",
-    "**/*.{scss}": "npm run lint:scss:fix"
+    "**/*.scss": "npm run lint:scss:fix"
   }
 }
