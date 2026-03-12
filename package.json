@@ -5,15 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --port 3001 --turbopack",
-    "build": "next build",
+    "build": "npm run quality && next build && node build-banner.js",
     "start": "next start --port 3001",
-    "lint": "next lint",
     "quality": "npm run lint:ts && npm run lint:scss",
     "quality:fix": "npm run lint:ts:fix && npm run lint:scss:fix",
     "lint:ts": "next lint",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
-    "lint:scss": "npx stylelint \"**/*.scss\"",
-    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "lint:scss": "stylelint \"**/*.scss\"",
+    "lint:scss:fix": "stylelint \"**/*.scss\" --fix",
     "prepare": "husky"
   },
   "dependencies": {
@@ -31,6 +30,8 @@
     "@types/react-dom": "19.0.2",
     "eslint": "9.34.0",
     "husky": "9.1.7",
+    "chalk": "^5.6.2",
+    "figlet": "^1.11.0",
     "lint-staged": "15.3.0",
     "react-html-props": "2.0.3",
     "string-replace-loader": "3.1.0",

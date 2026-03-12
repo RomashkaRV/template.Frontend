@@ -33,6 +33,7 @@
       "store": ["./store"],
       "types": ["./types"],
       "libs": ["./libs"],
+      "widgets": ["./widgtes"],
     }
   },
   "include": [

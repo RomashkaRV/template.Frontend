@@ -1,8 +1,8 @@
 "use client";
 
-import type { SwitchThemeButtonTheme } from "components/widgets";
-
 import { useMount } from "hooks";
+
+import type { SwitchThemeButtonTheme } from "../../widgets";
 
 export const SetTheme = () => {
   useMount(() => {

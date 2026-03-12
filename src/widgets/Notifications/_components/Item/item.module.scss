@@ -1,0 +1,31 @@
+@use "style/mixins/adaptive";
+
+.item {
+  padding: 12px 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+
+  border-radius: 10px;
+
+  color: var(--base-white, #FFF);
+  background: var(--neutral-800, #262626);
+}
+
+.error {
+  color: hsl(0deg 84.2% 60.2%);
+}
+
+.warning {
+  color: hsl(45.4deg 93.4% 47.5%);
+}
+
+.success {
+  color: hsl(142.1deg 70.6% 45.3%);
+}

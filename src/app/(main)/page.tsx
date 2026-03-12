@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-
-import { notificationsEventManager } from "components/widgets";
+import { notificationsEventManager } from "widgets/Notifications";
 
 import style from "./page.module.scss";
 

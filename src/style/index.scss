@@ -1,15 +1,28 @@
 @use "reset";
 @use "theme";
-@use "pages/not-found";
 @use "pages/global-error";
-@import "https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap";
+@use "pages/not-found";
+
+html {
+  min-width: 260px;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
 
 body {
   height: 100%;
 
-  font-family: Geologica, sans-serif;
+  overflow-x: hidden;
 
-  overflow: hidden;
+  background-color: var(--base-white);
+}
 
-  background-color: var(--slate-50);
+@media (prefers-reduced-motion) {
+  * {
+    animation: none !important;
+
+    transition: none !important;
+  }
 }
