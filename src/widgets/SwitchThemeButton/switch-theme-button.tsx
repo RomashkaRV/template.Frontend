@@ -1,49 +1,35 @@
 "use client";
 
 import type { FC } from "react";
-import { useState } from "react";
 
 import type { ButtonProps } from "react-html-props";
 
 import { IconButton } from "components/core";
 import { IconMoon, IconSun } from "components/icons";
 
-import { useMount } from "hooks";
-
 import type { SwitchThemeButtonTheme } from "./types";
 
+import style from "./switch-theme-button.module.scss";
+
 export const SwitchThemeButton: FC<Omit<ButtonProps, "onClick">> = (props) => {
-  const [theme, setTheme] = useState<SwitchThemeButtonTheme>("light");
-
-  useMount(() => {
-    const saved = localStorage.getItem("theme") as SwitchThemeButtonTheme;
-    if (saved) {
-      setTheme(saved);
-      document.body.classList.add(saved);
-    } else {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: light)"
-      ).matches;
-      const initial = prefersDark ? "dark" : "light";
-      setTheme(initial);
-      document.body.classList.add(initial);
-    }
-  });
-
   const toggleTheme = () => {
-    const toggledTheme: SwitchThemeButtonTheme =
-      theme === "dark" ? "light" : "dark";
-    setTheme(toggledTheme);
+    const isDark = document.documentElement.classList.toggle("dark");
+    const theme: SwitchThemeButtonTheme = isDark ? "dark" : "light";
 
-    document.body.classList.remove(theme);
-    document.body.classList.add(toggledTheme);
+    document.documentElement.style.colorScheme = theme;
 
-    window.localStorage.setItem("theme", toggledTheme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      // localStorage может быть недоступен (приватный режим) — тема просто не сохранится
+    }
   };
 
   return (
     <IconButton {...props} onClick={toggleTheme}>
-      {theme === "dark" ? <IconSun /> : <IconMoon />}
+      <IconSun className={style.sun} />
+
+      <IconMoon className={style.moon} />
     </IconButton>
   );
 };

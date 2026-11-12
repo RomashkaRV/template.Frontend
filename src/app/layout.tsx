@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import "style/index.scss";
 
 import { Notifications, SwitchThemeButton } from "../widgets";
-import { SetTheme } from "./_components";
+import { themeScript } from "./_components";
 
 export const metadata: Metadata = {
   title: "Next App",
@@ -21,13 +21,16 @@ const GoogleSans = localFont({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- статичная строка, нужна до первой отрисовки */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+
       <body className={GoogleSans.className}>
         <div>{children}</div>
 
         <Notifications />
-
-        <SetTheme />
 
         <SwitchThemeButton />
       </body>

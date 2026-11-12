@@ -1,1 +1,1 @@
-export { SetTheme } from "./SetTheme";
+export { themeScript } from "./theme-script";

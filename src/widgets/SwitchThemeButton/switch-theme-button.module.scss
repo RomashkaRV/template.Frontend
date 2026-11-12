@@ -1,0 +1,18 @@
+// Иконку выбирает CSS по классу на <html>, поэтому она верная с первого кадра
+.sun {
+  display: none;
+}
+
+.moon {
+  display: block;
+}
+
+:global(html.dark) {
+  .sun {
+    display: block;
+  }
+
+  .moon {
+    display: none;
+  }
+}

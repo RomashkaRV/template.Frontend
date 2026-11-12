@@ -26,7 +26,7 @@
     "sass": "1.108.2"
   },
   "devDependencies": {
-    "@romashka_rv/frontend-config": "4.0.0",
+    "@romashka_rv/frontend-config": "4.0.1",
     "@svgr/webpack": "8.1.0",
     "@types/node": "22.20.5",
     "@types/react": "19.3.0",
