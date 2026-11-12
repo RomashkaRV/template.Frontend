@@ -1,8 +1,1 @@
-import config from "@romashka_rv/frontend-config/eslint";
-
-export default [
-  ...config,
-  {
-    ignores: ["next-env.d.ts"]
-  }
-];
+export { default } from "@romashka_rv/frontend-config/eslint";

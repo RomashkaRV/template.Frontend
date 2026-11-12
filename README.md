@@ -1,17 +1,17 @@
 # Frontend
 
-Проект на **Next.js 15 + React 19 + TypeScript 5**, со строгой настройкой качества кода.
+Проект на **Next.js 16 + React 19 + TypeScript 6**, со строгой настройкой качества кода.
 Используются единые конфиги из пакета [`@romashka_rv/frontend-config`](https://github.com/RomashkaRV/frontend.configs).
 
 ---
 
 ## 🚀 Стек технологий
 
-- [Next.js 15](https://nextjs.org/)
+- [Next.js 16](https://nextjs.org/) (Turbopack, Cache Components)
 - [React 19](https://react.dev/)
-- [TypeScript 5](https://www.typescriptlang.org/)
+- [TypeScript 6](https://www.typescriptlang.org/)
 - [Sass (SCSS)](https://sass-lang.com/)
-- [ESLint 9](https://eslint.org/) + [Stylelint 16](https://stylelint.io/)
+- [ESLint 10](https://eslint.org/) + [Stylelint 17](https://stylelint.io/)
 - [Prettier 3](https://prettier.io/)
 - [Commitlint](https://commitlint.js.org/)
 
@@ -19,8 +19,8 @@
 
 ## ⚙️ Требования
 
-- **Node.js >= 20.11.0**
-- npm или pnpm
+- **Node.js >= 22.22.1** (см. `.nvmrc`)
+- npm
 
 ---
 
@@ -36,7 +36,7 @@ npm install
 npm run dev
 ```
 
-* Сервер стартует на `http://localhost:3000`
+- Сервер стартует на `http://localhost:3000`
 
 ---
 
@@ -56,7 +56,7 @@ npm run build
 
 3. Для запуска standalone сервера:
 
-* Если `.next/static` находится **не внутри standalone**, необходимо скопировать её:
+- Если `.next/static` находится **не внутри standalone**, необходимо скопировать её:
 
 ```bash
 cp -r ../static ./standalone/.next/
@@ -69,19 +69,25 @@ $env:PORT=3000; node server.js   # Windows PowerShell
 PORT=3000 node server.js
 ```
 
-* Сервер отдаёт все страницы и статические файлы (`/_next/static/...`)
-* Перейти в браузере: `http://localhost:3000`
+- Сервер отдаёт все страницы и статические файлы (`/_next/static/...`)
+- Перейти в браузере: `http://localhost:3000`
+
 ---
 
 ## Линтинг и качество кода
 
 ```bash
-# Проверка TypeScript и SCSS
+# Проверка ESLint + Stylelint + Prettier
 npm run quality
+
+# Проверка типов
+npm run typecheck
 
 # Автоисправление
 npm run quality:fix
 ```
 
-Husky + lint-staged автоматически применяют исправления перед коммитом.
-
+Форматирование (отступы, кавычки и т. д.) задаёт единый `prettier.config.js` из
+`@romashka_rv/frontend-config`, он же используется ESLint и редактором.
+Husky + lint-staged автоматически применяют исправления к изменённым файлам перед коммитом,
+а commitlint проверяет формат сообщения (`feature: ...`, `fix: ...`).

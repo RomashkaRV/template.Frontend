@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import type { ButtonProps } from "react-html-props";
 
 import style from "./index.module.scss";

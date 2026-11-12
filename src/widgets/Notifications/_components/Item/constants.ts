@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import type { SVGProps } from "react-html-props";
 
 import type { ItemType } from "./types";

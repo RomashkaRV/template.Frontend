@@ -1,12 +1,14 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
 
 import type { NotificationArgs } from "./types";
 
 import { Item } from "./_components";
 import { notificationsEventManager } from "./notifications-event-manager";
+
 import style from "./notifications.module.scss";
 
 export const Notifications = () => {
@@ -14,59 +16,55 @@ export const Notifications = () => {
     []
   );
 
-  const [timeouts, setTimeouts] = useState<
-    Record<string, ReturnType<typeof setTimeout>>
-  >({});
-
-  const handleClose = (id: string) => {
-    clearTimeout(timeouts[id]);
-
-    setTimeouts((prevTimeouts) => {
-      const newTimeouts = { ...prevTimeouts };
-
-      delete newTimeouts[id];
-
-      return newTimeouts;
-    });
-
-    setNotifications((prevNotifications) =>
-      prevNotifications.filter((notification) => notification.id !== id)
-    );
-  };
+  const timeoutsRef = useRef(new Map<string, ReturnType<typeof setTimeout>>());
 
   useEffect(() => {
-    notificationsEventManager.onShow(
+    const timeouts = timeoutsRef.current;
+
+    const remove = (id: string) => {
+      clearTimeout(timeouts.get(id));
+      timeouts.delete(id);
+
+      setNotifications((prev) => prev.filter((item) => item.id !== id));
+    };
+
+    const clearAll = () => {
+      timeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+      timeouts.clear();
+    };
+
+    const unsubscribeShow = notificationsEventManager.onShow(
       ({ id = nanoid(), timeout = 7000, ...rest }: NotificationArgs) => {
-        setNotifications((prevNotifications) => [
-          ...prevNotifications,
+        setNotifications((prev) => [
+          ...prev.filter((item) => item.id !== id),
           { id, ...rest }
         ]);
 
+        clearTimeout(timeouts.get(id));
+
         if (timeout) {
-          setTimeouts((prevIds) => ({
-            ...prevIds,
-            [id]: setTimeout(() => {
-              handleClose(id);
-            }, timeout)
-          }));
+          // таймеры очищаются в cleanup через clearAll (Map), правило этого не видит
+          // eslint-disable-next-line @eslint-react/web-api-no-leaked-timeout
+          const timeoutId = setTimeout(() => remove(id), timeout);
+
+          timeouts.set(id, timeoutId);
         }
       }
     );
 
-    notificationsEventManager.onHide((id: string) => {
-      setNotifications((prevNotifications) =>
-        prevNotifications.filter((notice) => notice.id !== id)
-      );
-    });
+    const unsubscribeHide = notificationsEventManager.onHide(remove);
 
-    notificationsEventManager.onHideAll(() => {
-      // Очищаем все таймауты
-      Object.values(timeouts).forEach(clearTimeout);
-      setTimeouts({});
-
-      // Очищаем все уведомления
+    const unsubscribeHideAll = notificationsEventManager.onHideAll(() => {
+      clearAll();
       setNotifications([]);
     });
+
+    return () => {
+      unsubscribeShow();
+      unsubscribeHide();
+      unsubscribeHideAll();
+      clearAll();
+    };
   }, []);
 
   return (

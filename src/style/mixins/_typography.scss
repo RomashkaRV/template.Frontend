@@ -6,21 +6,21 @@
   font-weight: 800;
   line-height: 120%;
 
-  @include adaptive.adaptive-md {
+  @include adaptive.md {
     font-size: 32px;
     font-style: normal;
     font-weight: 800;
     line-height: 120%;
   }
 
-  @include adaptive.adaptive-sm {
+  @include adaptive.sm {
     font-size: 28px;
     font-style: normal;
     font-weight: 800;
     line-height: 120%;
   }
 
-  @include adaptive.adaptive-xs {
+  @include adaptive.xs {
     font-size: 24px;
     font-style: normal;
     font-weight: 800;
@@ -34,21 +34,21 @@
   font-weight: 600;
   line-height: 150%;
 
-  @include adaptive.adaptive-md {
+  @include adaptive.md {
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
   }
 
-  @include adaptive.adaptive-sm {
+  @include adaptive.sm {
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
   }
 
-  @include adaptive.adaptive-xs {
+  @include adaptive.xs {
     font-size: 12px;
     font-style: normal;
     font-weight: 600;

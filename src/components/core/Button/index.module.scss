@@ -11,7 +11,7 @@
 
     border-radius: 10px;
 
-    transition: .2s ease;
+    transition: 0.2s ease;
 
     background-color: transparent;
   }
@@ -25,16 +25,16 @@
   }
 
   .button.primary {
-    color: var(--neutral-950, #0A0A0A);
-    background: var(--base-white, #FFF);
+    color: var(--neutral-950, #0a0a0a);
+    background: var(--base-white, #fff);
 
     &:hover {
-      background: var(--neutral-300, #D4D4D4);
+      background: var(--neutral-300, #d4d4d4);
     }
   }
 
   .button.secondary {
-    color: var(--base-white, #FFF);
+    color: var(--base-white, #fff);
     background: var(--neutral-800, #262626);
 
     &:hover {
@@ -43,7 +43,7 @@
   }
 
   .button.overlay {
-    color: var(--base-white, #FFF);
+    color: var(--base-white, #fff);
     background-color: transparent;
 
     &:hover {
@@ -52,7 +52,7 @@
   }
 
   .button.negative {
-    color: var(--base-white, #FFF);
+    color: var(--base-white, #fff);
     background: var(--red-500);
 
     &:hover {

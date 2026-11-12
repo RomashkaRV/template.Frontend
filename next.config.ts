@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+// Превращает <button classNames={[a, { b: cond }, c]} /> в className="a b c".
+// Работает через loader Turbopack (в Next 16 он используется и в dev, и в build).
 const stringReplaceOptions = {
   search: "classNames={\\[([\\s\\S]*?)]}",
   replace: `className={[$1]
@@ -29,7 +31,21 @@ const nextConfig: NextConfig = {
   turbopack: {
     rules: {
       "*.svg": {
-        loaders: ["@svgr/webpack"],
+        loaders: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              svgoConfig: {
+                plugins: [
+                  {
+                    name: "preset-default",
+                    params: { overrides: { removeViewBox: false } }
+                  }
+                ]
+              }
+            }
+          }
+        ],
         as: "*.js"
       },
       "*.tsx": {
@@ -42,40 +58,10 @@ const nextConfig: NextConfig = {
       }
     }
   },
+  cacheComponents: true,
+  partialPrefetching: true,
   experimental: {
-    useCache: true,
     authInterrupts: true
-  },
-  sassOptions: {
-    silenceDeprecations: ["legacy-js-api"]
-  },
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      loader: "@svgr/webpack",
-      options: {
-        svgoConfig: {
-          plugins: [
-            {
-              name: "preset-default",
-              params: {
-                overrides: {
-                  removeViewBox: false
-                }
-              }
-            }
-          ]
-        }
-      }
-    });
-
-    config.module.rules.push({
-      test: /\.tsx$/,
-      loader: "string-replace-loader",
-      options: stringReplaceOptions
-    });
-
-    return config;
   }
 };
 

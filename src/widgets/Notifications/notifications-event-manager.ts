@@ -16,15 +16,21 @@ export const eventManager = {
       this.callbacks[event] = [];
     }
 
-    this.callbacks[event].push(
-      callback as NotificationEventManagerCallback<unknown>
-    );
+    const cb = callback as NotificationEventManagerCallback<unknown>;
+
+    this.callbacks[event].push(cb);
+
+    return () => {
+      this.callbacks[event] = this.callbacks[event].filter(
+        (item) => item !== cb
+      );
+    };
   },
 
   emit<T>(event: NotificationEventManagerEvent, data: T) {
     if (!this.callbacks[event]) return;
 
-    this.callbacks[event].forEach((callback) => {
+    [...this.callbacks[event]].forEach((callback) => {
       callback(data);
     });
   }
@@ -36,7 +42,7 @@ export const notificationsEventManager = {
   },
 
   onShow(callback: (data: NotificationArgs) => void) {
-    eventManager.on("show", callback);
+    return eventManager.on("show", callback);
   },
 
   hide(id: string) {
@@ -44,7 +50,7 @@ export const notificationsEventManager = {
   },
 
   onHide(callback: (id: string) => void) {
-    eventManager.on("hide", callback);
+    return eventManager.on("hide", callback);
   },
 
   hideAll() {
@@ -52,6 +58,6 @@ export const notificationsEventManager = {
   },
 
   onHideAll(callback: () => void) {
-    eventManager.on("hideAll", callback);
+    return eventManager.on("hideAll", callback);
   }
 };

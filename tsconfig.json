@@ -1,48 +1,41 @@
 {
+  "extends": "@romashka_rv/frontend-config/tsconfig",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "types": ["node"],
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "baseUrl": "./src",
-    "paths" : {
-      "components": ["./components"],
-      "api": ["./api"],
-      "constants": ["./constants"],
-      "hooks": ["./hooks"],
-      "providers": ["./providers"],
-      "store": ["./store"],
-      "types": ["./types"],
-      "libs": ["./libs"],
-      "widgets": ["./widgtes"],
+    "paths": {
+      "components": ["./src/components"],
+      "components/*": ["./src/components/*"],
+      "widgets": ["./src/widgets"],
+      "widgets/*": ["./src/widgets/*"],
+      "hooks": ["./src/hooks"],
+      "hooks/*": ["./src/hooks/*"],
+      "types": ["./src/types"],
+      "types/*": ["./src/types/*"],
+      "style": ["./src/style"],
+      "style/*": ["./src/style/*"],
+      "api": ["./src/api"],
+      "api/*": ["./src/api/*"],
+      "constants": ["./src/constants"],
+      "constants/*": ["./src/constants/*"],
+      "providers": ["./src/providers"],
+      "providers/*": ["./src/providers/*"],
+      "store": ["./src/store"],
+      "store/*": ["./src/store/*"],
+      "libs": ["./src/libs"],
+      "libs/*": ["./src/libs/*"]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

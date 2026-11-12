@@ -1,5 +1,5 @@
-import figlet from "figlet";
 import chalk from "chalk";
+import figlet from "figlet";
 
 const logo = figlet.textSync("TEMPLATE", {
   font: "4Max",
@@ -24,11 +24,11 @@ for (const line of lines) {
 
   console.log(
     chalk.gray("│") +
-    " ".repeat(padding) +
-    chalk.magentaBright(line) +
-    rightPad +
-    " ".repeat(padding) +
-    chalk.gray("│")
+      " ".repeat(padding) +
+      chalk.magentaBright(line) +
+      rightPad +
+      " ".repeat(padding) +
+      chalk.gray("│")
   );
 }
 

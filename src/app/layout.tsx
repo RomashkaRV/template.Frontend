@@ -5,7 +5,6 @@ import type { ReactNode } from "react";
 import "style/index.scss";
 
 import { Notifications, SwitchThemeButton } from "../widgets";
-
 import { SetTheme } from "./_components";
 
 export const metadata: Metadata = {
