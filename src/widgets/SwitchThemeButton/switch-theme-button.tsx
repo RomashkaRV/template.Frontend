@@ -26,7 +26,7 @@ export const SwitchThemeButton: FC<Omit<ButtonProps, "onClick">> = (props) => {
   };
 
   return (
-    <IconButton {...props} onClick={toggleTheme}>
+    <IconButton aria-label="Switch theme" {...props} onClick={toggleTheme}>
       <IconSun className={style.sun} />
 
       <IconMoon className={style.moon} />

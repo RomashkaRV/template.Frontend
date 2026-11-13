@@ -16,7 +16,14 @@ export const metadata: Metadata = {
 };
 
 const GoogleSans = localFont({
-  src: [{ path: "../../public/fonts/GoogleSans.ttf", style: "normal" }]
+  src: [
+    {
+      path: "../../public/fonts/GoogleSans.woff2",
+      weight: "400 700",
+      style: "normal"
+    }
+  ],
+  display: "swap"
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -28,7 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
 
       <body className={GoogleSans.className}>
-        <div>{children}</div>
+        <main>{children}</main>
 
         <Notifications />
 
